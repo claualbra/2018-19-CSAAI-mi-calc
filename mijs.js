@@ -3,6 +3,7 @@ function main() {
     op1: "",
     op2: "",
     op: "",
+    expr: "",
     estado: "inic",
     gui: {
       uno: document.getElementById('1'),
@@ -59,7 +60,12 @@ function main() {
       this.gui.display.innerHTML = "";
     },
     boton_calcular: function(){
-      
+      this.expr = this.op1 +this.op + this.op2;
+      this.gui.display.innerHTML = eval(this.expr);
+      this.estado = "inic";
+      this.op2 = "";
+      this.op1 = "";
+      this.op = "";
     }
   }
   calculadora.gui.uno.onclick = () => {
@@ -105,7 +111,7 @@ function main() {
     calculadora.boton_reset("C");
   }
   calculadora.gui.igual.onclick = () => {
-    calculadora.boton_calcular("=");
+    calculadora.boton_calcular();
   }
   calculadora.gui.entre.onclick = () => {
     calculadora.boton_op("/");
