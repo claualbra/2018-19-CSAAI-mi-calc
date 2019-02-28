@@ -22,7 +22,7 @@ function main() {
       reset: document.getElementById('reset'),
       igual: document.getElementById('='),
       entre: document.getElementById('/'),
-      display: document.getElementById('display')
+      display: document.getElementById('display'),
     },
     boton_dig: function(dig){
       switch (this.estado) {
@@ -60,12 +60,18 @@ function main() {
       this.gui.display.innerHTML = "";
     },
     boton_calcular: function(){
-      this.expr = this.op1 +this.op + this.op2;
-      this.gui.display.innerHTML = eval(this.expr);
-      this.estado = "inic";
-      this.op2 = "";
-      this.op1 = "";
-      this.op = "";
+      switch (this.estado) {
+        case "op2":
+          this.expr = this.op1 +this.op + this.op2;
+          this.gui.display.innerHTML = eval(this.expr);
+          this.estado = "inic";
+          this.op2 = "";
+          this.op1 = "";
+          this.op = "";
+          break;
+        default:
+          console.log("Parametro no valido");
+      }
     }
   }
   calculadora.gui.uno.onclick = () => {
@@ -108,7 +114,7 @@ function main() {
     calculadora.boton_dig("0");
   }
   calculadora.gui.reset.onclick = () => {
-    calculadora.boton_reset("C");
+    calculadora.boton_reset();
   }
   calculadora.gui.igual.onclick = () => {
     calculadora.boton_calcular();
